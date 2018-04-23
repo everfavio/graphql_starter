@@ -1,19 +1,18 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema';
-import resolvers from './resolvers';
+import mongoose from 'mongoose';
 
 const app = express();
+mongoose.Promise = Promise;
+mongoose.connect('mongodb://localhost/graphqdb');
 
 app.get('/', (req, res) => {
   return res.json({ mensaje: 'app levantada'});
 });
 
-const root = resolvers;
-
 app.use('/graphql',graphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: true,
 }));
 
