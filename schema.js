@@ -28,9 +28,10 @@ enum Gender{
 }
 
 type Query {
+  getItem(id: ID! ): HackerNewsItem
   item: HackerNewsItem
-  getUser(id: ID): User
   users: [User]
+  getUsers: [User]
 }
 input HackerNewsItemInput{
   id: String
@@ -47,10 +48,13 @@ input UserInput{
   email: String
   age: Int!
   gender: Gender
-  items: [HackerNewsItemInput]
+  items: [ID!]
 }
 type Mutation{
   createUser(input: UserInput) : User
+  updateUser(input: UserInput) : User
+  deleteUser(id: ID!): User
+  createItem(input: HackerNewsItemInput) : HackerNewsItem
 }
 `;
 const schema = makeExecutableSchema({typeDefs, resolvers});
