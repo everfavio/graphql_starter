@@ -18,6 +18,7 @@ export const resolvers = {
       return users;
     },
   },
+  
   Mutation: {
     createUser: async (_, {input}) => {
       const user = await User.create(input);
